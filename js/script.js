@@ -155,17 +155,18 @@ function calculateRisk(likelihood, impact) {
 function renderScores() {
   const scoresDiv = document.getElementById('scores');
   scoresDiv.innerHTML = `
-      /*<p class="score__item">Risk <span class="score score--${getScoreClass(scores.risk)}">${getScoreText(scores.risk)}</span></p>
+      <!--<p class="score__item">Risk <span class="score score--${getScoreClass(scores.risk)}">${getScoreText(scores.risk)}</span></p>
       <p class="score__item">Likelihood <span class="score score--${getScoreClass(scores.likelihood)}">${getScoreText(scores.likelihood)}</span></p>
-      <p class="score__item">Impact <span class="score score--${getScoreClass(scores.impact)}">${getScoreText(scores.impact)}</span></p>
-	  */<p class="score__item">Change type <span class="score score--${getScoreClass(scores.impact)}">${getScoreText(scores.cab)}</span></p>
+      <p class="score__item">Impact <span class="score score--${getScoreClass(scores.impact)}">${getScoreText(scores.impact)}</span></p>-->
+      <p class="score__item">Change type <span class="score score--${getScoreClass(scores.impact)}">${getScoreText(scores.cab)}</span></p>
   `;
 }
 
 // Function to get score text
 function getScoreText(score) {
-  if (score <= 1) return 'Low';
-  if (score === 2) return 'Medium';
+  //if (score <= 1) return 'Low';
+  //if (score === 2) return 'Medium';
+  if (score == 4) return 'Standard';
   return 'High';
 }
 
