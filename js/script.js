@@ -167,7 +167,7 @@ function getScoreText(score) {
   //if (score <= 1) return 'Low';
   //if (score === 2) return 'Medium';
   if (score == 4) return 'Standard';
-  return 'High';
+  return 'Normal';
 }
 
 // Function to get score class
