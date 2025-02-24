@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
       window.history.replaceState({}, '', url);
   }
 
-// Sample data
+/* Sample data
 const questions = [
   { id: 1, text: 'The attack can be completed with common skills' },
   { id: 2, text: 'The attack can be completed without significant resources' },
@@ -47,11 +47,27 @@ const questions = [
   { id: 9, text: 'The asset has or creates significant business value' },
   { id: 10, text: 'The repair or replacement costs will be significant' }
 ];
+*/
+//modified criteria
+const questions = [
+  { id: 1, text: 'The change has minimal potential for disruption or impact on systems, services, or users.' },
+  { id: 2, text: 'The change is well understood and routine.' },
+  { id: 3, text: 'The change has a clear, step-by-step process that has been tested and verified.' },
+  { id: 4, text: 'There results of the change are consistent and well known.' },
+
+];
+
+const cab = {
+	standard: 0,
+	normal: 0
+},
 
 const scores = {
   risk: 0,
   likelihood: 0,
-  impact: 0
+  impact: 0,
+  standard: 0,
+  normal: 0
 };
 
 // Function to render questions
@@ -86,13 +102,19 @@ function updateScores() {
   updateUrl(binaryString);
 
   // Calculate scores using original algorithm
-  scores.likelihood = calculateLikelihood(binaryString);
-  scores.impact = calculateImpact(binaryString);
-  scores.risk = calculateRisk(scores.likelihood, scores.impact);
+  //scores.likelihood = calculateLikelihood(binaryString);
+  //scores.impact = calculateImpact(binaryString);
+  //scores.risk = calculateRisk(scores.likelihood, scores.impact);
+  scores.cab = calculatecab(scores.likelihood, scores.impact);
+
 
   renderScores();
 }
 
+function calculatecab(binaryString) {
+  return calculateChunkScore(binaryString, 0, 3, 3);
+}
+/*
 function calculateLikelihood(binaryString) {
   return calculateChunkScore(binaryString, 0, 5, 2);
 }
@@ -100,7 +122,7 @@ function calculateLikelihood(binaryString) {
 function calculateImpact(binaryString) {
   return calculateChunkScore(binaryString, 6, 9, 2);
 }
-
+*/
 function calculateChunkScore(binaryString, startIndex, stopIndex, blockSize) {
   let scoreAccumulator = 0;
   
@@ -121,21 +143,22 @@ function calculateChunkScore(binaryString, startIndex, stopIndex, blockSize) {
 
   return scoreAccumulator;
 }
-
+/*
 function calculateRisk(likelihood, impact) {
   const riskSum = likelihood + impact;
   if (riskSum <= 3) return 1;  // Low
   if (riskSum <= 5) return 2;  // Medium
   return 4;  // High
 }
-
+*/
 // Function to render scores
 function renderScores() {
   const scoresDiv = document.getElementById('scores');
   scoresDiv.innerHTML = `
-      <p class="score__item">Risk <span class="score score--${getScoreClass(scores.risk)}">${getScoreText(scores.risk)}</span></p>
+      /*<p class="score__item">Risk <span class="score score--${getScoreClass(scores.risk)}">${getScoreText(scores.risk)}</span></p>
       <p class="score__item">Likelihood <span class="score score--${getScoreClass(scores.likelihood)}">${getScoreText(scores.likelihood)}</span></p>
       <p class="score__item">Impact <span class="score score--${getScoreClass(scores.impact)}">${getScoreText(scores.impact)}</span></p>
+	  */<p class="score__item">Change type <span class="score score--${getScoreClass(scores.impact)}">${getScoreText(scores.cab)}</span></p>
   `;
 }
 
