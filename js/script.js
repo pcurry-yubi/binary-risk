@@ -60,7 +60,7 @@ const questions = [
 const cab = {
 	standard: 0,
 	normal: 0
-},
+};
 
 const scores = {
   risk: 0,
