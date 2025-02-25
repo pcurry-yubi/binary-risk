@@ -204,8 +204,8 @@ function getScoreText(score) {
 
 // Function to get score class
 function getScoreClass(score) {
-  if (score <= 3) return 'low';
-  if (score == 4) return 'high';
+  if (score <= 3) return 'high';
+  if (score == 4) return 'low';
   //return 'high';
 }
 
