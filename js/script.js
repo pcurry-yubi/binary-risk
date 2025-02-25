@@ -135,12 +135,13 @@ function updateScores() {
   scores.likelihood = calculateLikelihood(binaryString);
   scores.impact = calculateImpact(binaryString);
   scores.risk = calculateRisk(scores.likelihood, scores.impact);
+  scores.change = calculateChange(binaryString);
 
   renderScores();
 }
 
 function calculateChange(binaryString) {
-  return calculateChunkScore(binaryString, 0, 4, 2);
+  return calculateChunkScore(binaryString, 0, 3, 1);
 }
 function calculateLikelihood(binaryString) {
   return calculateChunkScore(binaryString, 0, 5, 2);
@@ -153,7 +154,7 @@ function calculateImpact(binaryString) {
 function calculateChunkScore(binaryString, startIndex, stopIndex, blockSize) {
   let scoreAccumulator = 0;
   
-  for (let i = startIndex; i <= stopIndex; i += blockSize) {
+  /*for (let i = startIndex; i <= stopIndex; i += blockSize) {
       const blockScore = (binaryString >> i) & 3; // Get 2 bits
       const blockScorePartA = blockScore & 1;
       const blockScorePartB = (blockScore >> 1) & 1;
@@ -167,6 +168,10 @@ function calculateChunkScore(binaryString, startIndex, stopIndex, blockSize) {
           scoreAccumulator = (calculatedScore === 1 ? 2 : 4);
       }
   }
+*/
+
+  const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+  scoreAccumulator = checkedBoxes.length;
 
   return scoreAccumulator;
 }
@@ -191,16 +196,17 @@ function renderScores() {
 
 // Function to get score text
 function getScoreText(score) {
+  console.log(score);
   if (score <= 3) return 'Normal';
-  if (score === 4) return 'Standard';
-  return 'High';
+  if (score == 4) return 'Standard';
+  //return 'High';
 }
 
 // Function to get score class
 function getScoreClass(score) {
-  if (score <= 1) return 'low';
-  if (score === 2) return 'medium';
-  return 'high';
+  if (score <= 3) return 'low';
+  if (score == 4) return 'high';
+  //return 'high';
 }
 
 // Function to set checkboxes from binary string
